@@ -1,0 +1,17 @@
+{
+  "name": "ticket-machine",
+  "version": "0.0.1",
+  "author": "Roger Urscheler, Unify Inc.",
+  "license": "Apache 2.0",
+  "description": "Solution to remote support a native ticket machine application",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "circuit-sdk": "^1.2.7604",
+    "express": "^4.17.1",
+    "socket.io": "^2.3.0"
+  },
+  "devDependencies": {}
+}

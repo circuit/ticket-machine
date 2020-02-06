@@ -1,0 +1,38 @@
+{
+	"operator": {
+		"supervisor": "ticketing.supervisor@mailinator.com",
+		"oauth": {
+			"client_id": "296df888aa7c4371bc0fb454fad9344f",
+			"domain": "circuitsandbox.net",
+			"scope": "READ_USER_PROFILE,WRITE_CONVERSATIONS,READ_CONVERSATIONS,CALLS"
+		}
+	},
+	"da": {
+		"oauth": {
+			"client_id": "296df888aa7c4371bc0fb454fad9344f",
+			"domain": "circuitsandbox.net"
+		}
+	},
+	"machines": [
+		{
+			"id": "100",
+			"location": "Schwerzenbach ZH"
+		},
+		{
+			"id": "101",
+			"location": "Schwerzenbach ZH"
+		},
+		{
+			"id": "110",
+			"location": "Frauenfeld TG"
+		},
+		{
+			"id": "111",
+			"location": "Frauenfeld TG"
+		},
+		{
+			"id": "120",
+			"location": "Andelfingen ZH"
+		}
+	]
+}

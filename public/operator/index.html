@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Ticket Help Operators</title>
+  <style>
+    [v-cloak] {
+      display: none;
+    }
+  </style>
+
+  <link href="//fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+  <link href="//cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">
+  <link href="//cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div id="app" v-cloak class="container">
+    <v-app>
+      <h2>Ticketing Assistance Queue</h2>
+
+      <div v-if="loading" class="mx-auto mt-12">
+        <v-progress-circular indeterminate color="primary"></v-progress-circular>
+      </div>
+      <div v-else>
+        <div v-if="!localUser">
+          <v-btn class="mt-4" small color="primary" outlined @click="login">Login as operator</v-btn>
+        </div>
+        <div v-else>
+          <p>
+            <span>Operator: {{localUser.displayName}}</span>
+            <v-btn style="float:right" @click="logout" text small outlined color="primary">Logout</v-btn>
+          </p>
+          <v-simple-table fixed-header height="300px">
+            <template v-slot:default>
+              <thead>
+                <tr>
+                  <th style="width:70px">Machine</th>
+                  <th style="width:200px">Location</th>
+                  <th style="width:25px">APP</th>
+                  <th style="width:25px">DA</th>
+                  <th style="width:115px">Status</th>
+                  <th style="width:65px">Duration</th>
+                  <th style="width:80px">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr v-for="machine in machines">
+                  <td>{{machine.id}}</td>
+                  <td>{{machine.location}}</td>
+                  <td class="dot"><span :class="machine.connection['APP']" :title="machine.connection['APP']"></span>
+                  </td>
+                  <td class="dot"><span :class="machine.connection['DA']" :title="machine.connection['DA']"></span></td>
+                  <td :class="machine.status">{{statusText(machine)}}</td>
+                  <td><span v-if="machine.status === 'Waiting' && !!machine.wait">{{machine.wait}}
+                      sec</span></td>
+                  <td><span v-if="machine.status === 'Waiting'" title="Connect with machine">
+                      <v-btn small color="primary" @click="connect(machine)">Connect</v-btn>
+                  </td>
+                </tr>
+              </tbody>
+            </template>
+          </v-simple-table>
+          <div v-if="activeMachine" class="mt-4">
+            <h4>Machine {{activeMachine.id}} ({{activeMachine.location}})</h4>
+            <div class="my-2">
+              <v-btn small class="mr-2" color="primary" disabled @click="requestControl()">Request control</v-btn>
+              <v-btn small class="mr-2" color="error" @click="hangup()">End call</v-btn>  
+            </div>
+            <circuit-call-stage ref="callState"></circuit-call-stage>
+          </div>
+
+        </div>
+      </div>
+
+    </v-app>
+  </div>
+
+  <script src="//cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
+  <script type="module" src="//unpkg.com/@unify/circuit-web-components/circuit-call-stage.js" defer></script>
+  <script src="//unpkg.com/circuit-sdk@beta" async></script>
+  <script src="main.js"></script>
+
+</body>
+
+</html>

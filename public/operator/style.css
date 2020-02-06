@@ -1,0 +1,52 @@
+html {
+  font-weight: 300;
+  -webkit-font-smoothing: antialiased;
+}
+
+html, input {
+  font-family:
+    "HelveticaNeue-Light",
+    "Helvetica Neue Light",
+    "Helvetica Neue",
+    Helvetica,
+    Arial,
+    "Lucida Grande",
+    sans-serif;
+}
+
+html, body {
+  height: 100%;
+  margin: 10px;
+  padding: 0;
+}
+
+h2 {
+  padding-bottom: 10px;
+}
+
+[v-cloak] { display: none; }
+
+a:hover {
+  cursor: pointer !important;
+}
+
+
+
+.dot span {
+  height: 15px;
+  width: 15px;
+  vertical-align: text-bottom;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.dot .Online {
+  background-color: limegreen;
+}
+.dot .Offline {
+  background-color: red;
+}
+
+circuit-call-stage {
+  width: 100%;
+}

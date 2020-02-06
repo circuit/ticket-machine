@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>DA - Ticket machine</title>
+  <style>
+    [v-cloak] { display: none; }
+  </style>
+</head>
+<body>
+  <div id="app" v-cloak>
+    <div v-if="showMachineSelection">
+      Select one of the supported ticket machines to simulate.
+      <ul>
+        <li v-for="m in machines">
+          <a :href="'/da?id=' + m">{{origin}}/da?machine={{m}}</a>
+        </li>
+      </ul>
+    </div>
+    <div v-else>
+      App is running. Hidden desktop app used for real-time communication.
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
+  <script src="./main.js"></script>
+</body>
+</html>

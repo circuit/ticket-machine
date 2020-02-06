@@ -1,0 +1,27 @@
+{
+  "name": "da",
+  "version": "1.0.0",
+  "description": "Desktop app accompanying the ticket machine to allow sharing the screen. ",
+  "main": "index.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "keywords": [],
+  "author": "roger.urscheler@atos.net",
+  "license": "Apache 2.0",
+  "devDependencies": {
+    "electron": "^8.0.0"
+  },
+  "dependencies": {
+    "circuit-sdk": "^1.2.7901"
+  },
+  "build": {
+    "mac": {
+      "hardenedRuntime": true,
+      "entitlements": "entitlements.mac.plist",
+      "extendInfo": {
+        "NSMicrophoneUsageDescription": "Please give us access to your microphone"
+      }
+    }
+  }
+}

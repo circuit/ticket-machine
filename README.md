@@ -1,7 +1,5 @@
 # Ticket machine
 
-## Intro
-
 A ticket machine user (customer) needs help buying a ticket and presses the "Help" button. A remote operator connects to the machine which allows two-way audio with the machine, and the ability to view the screen.
 
 Furthermore the remote operator may use whiteboarding to draw on the screen, or interact with the screen by bying the ticket for the user. (This part it not yet in this prototype)

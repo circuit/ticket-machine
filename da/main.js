@@ -1,17 +1,5 @@
 const Circuit = require('./circuit.js');
-
-const getParams = query => {
-    if (!query) {
-        return {};
-    }
-    return (/^[?#]/.test(query) ? query.slice(1) : query)
-        .split('&')
-        .reduce((params, param) => {
-            let [key, value] = param.split('=');
-            params[key] = value ? decodeURIComponent(value.replace(/\+/g, ' ')) : '';
-            return params;
-        }, {});
-};
+const config = require('./config.json');
 
 // Define getDisplayMedia function to be used by the JS SDK to capture the screen
 Circuit.electron = Circuit.electron || {};
@@ -36,7 +24,6 @@ Circuit.electron.getDisplayMedia = async () => {
 // app
 let socket;
 let client;
-let config;
 Circuit.logger.setLevel(1);
 
 new Vue({
@@ -44,27 +31,18 @@ new Vue({
     data: {
         id: null,
         call: null,
-        origin: window.location.origin,
-        machines: [100, 101, 110, 111, 120],
-        showMachineSelection: false
+        origin: window.location.origin
     },
     mounted: function () {
-        const params = { id: "110" };//getParams(window.location.search);
-        if (!params || !params.id) {
-            this.showMachineSelection = true;
-            console.log('Define "id" query param for machine. E.g. http://127.0.0.1:3000/da/?id=200');
-            return;
-        }
-        this.id = params.id;
+        this.id = config.machineId
         this.connect();
     },
     methods: {
         connect: function () {
             socket = io('https://localhost:8443', { query: `da=${this.id}` });
 
-            socket.on('config', async cfg => {
+            socket.on('config', async config => {
                 // Logon to Circuit
-                config = cfg;
                 client = new Circuit.GuestClient(config.oauth);
 
                 client.addEventListener('connectionStateChanged', e => {

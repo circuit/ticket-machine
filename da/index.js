@@ -7,6 +7,8 @@ app.commandLine.appendSwitch('ignore-certificate-errors', 'true')
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow
 
+let debug = /--debug/.test(process.argv[2]);
+
 function createWindow () {
   // Create the browser window.
   mainWindow = new BrowserWindow({
@@ -15,14 +17,14 @@ function createWindow () {
     webPreferences: {
       nodeIntegration: true
     },
-    show: true
+    show: !!debug
   })
 
   // and load the index.html of the app.
   mainWindow.loadFile('index.html')
 
-  // Open the DevTools.
-  mainWindow.webContents.openDevTools();
+  // Open the DevTools in debug mode
+  debug && mainWindow.webContents.on('did-frame-finish-load', () => mainWindow.webContents.openDevTools());
 
   // Emitted when the window is closed.
   mainWindow.on('closed', function () {

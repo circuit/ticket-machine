@@ -1,4 +1,4 @@
-const Circuit = require('circuit-sdk');
+const Circuit = require('./circuit.js');
 
 const getParams = query => {
     if (!query) {

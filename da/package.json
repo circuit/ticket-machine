@@ -13,7 +13,6 @@
     "electron": "^8.0.0"
   },
   "dependencies": {
-    "circuit-sdk": "^1.2.7901"
   },
   "build": {
     "mac": {

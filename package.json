@@ -11,7 +11,7 @@
   "dependencies": {
     "circuit-sdk": "^1.2.7604",
     "express": "^4.17.1",
-    "socket.io": "^2.3.0"
+    "socket.io": "^2.4.0"
   },
   "devDependencies": {}
 }
